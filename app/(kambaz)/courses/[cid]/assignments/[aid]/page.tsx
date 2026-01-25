@@ -5,9 +5,9 @@ export default function AssignmentEditor() {
         <br/>
         <br/>
         <input id="wd-name" defaultValue="A1 - ENV + HTML" /><br /><br />
-        <textarea id="wd-description">
-          The assignment is available online Submit a link to the landing page of
-        </textarea>
+        <textarea id="wd-description"
+          defaultValue="The assignment is available online Submit a link to the landing page of"
+        />
         <br />
         <table>
           <tr>
@@ -35,10 +35,10 @@ export default function AssignmentEditor() {
               <label htmlFor="wd-display-grade">Display Grade as</label>
             </td>
             <td>
-              <select className="wd-btn" id="wd-display-grade">
+              <select className="wd-btn" id="wd-display-grade" defaultValue="Percentage">
                   <option value="Letter">Letter</option>
                   <option value="Points">Points</option>
-                  <option selected value="Percentage">Percentage</option>
+                  <option value="Percentage">Percentage</option>
               </select>
             </td>
           </tr>
@@ -48,9 +48,9 @@ export default function AssignmentEditor() {
               <label htmlFor="wd-submission">Submission Type</label>
             </td>
             <td>
-              <select className="wd-btn" id="wd-submission-type">
+              <select className="wd-btn" id="wd-submission-type" defaultValue="Online">
                   <option value="InPerson">InPerson</option>
-                  <option selected value="Online">Online</option>
+                  <option value="Online">Online</option>
               </select>
               <br/>
 
@@ -81,18 +81,18 @@ export default function AssignmentEditor() {
               <br/>
               <label htmlFor="wd-due-date">Due</label>
               <br/>
-              <input type="date" id="wd-due-date" name="wd-due-date" />
+              <input type="date" id="wd-due-date" name="wd-due-date" defaultValue="2026-11-25"/>
               <br/>
               <table>
                 <tr>
                   <td>
                   <label htmlFor="wd-available">Available from</label>
             <br/>
-              <input type="date" id="wd-available" name="wd-available" />
+              <input type="date" id="wd-available" name="wd-available" defaultValue="2026-11-22"/>
                   </td>
                   <td>
                   <label htmlFor="wd-until">Until</label> <br/>
-              <input type="date" id="wd-until" name="wd-until" />
+              <input type="date" id="wd-until" name="wd-until" defaultValue="2026-11-25"/>
                   </td>
                 </tr>
               </table>
