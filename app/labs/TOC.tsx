@@ -1,25 +1,46 @@
+"use client";
+
 import Link from "next/link";
+import { Nav, NavItem, NavLink } from "react-bootstrap";
+
 export default function TOC() {
- return (
-   <ul>
-     <li>
-       <Link href="/labs" id="wd-lab1-link">
-         Home </Link>
-     </li>
-     <li>
-       <Link href="/labs/lab1" id="wd-lab1-link">
-         Lab 1 </Link>
-     </li>
-     <li>
-       <Link href="/labs/lab2" id="wd-lab2-link">
-         Lab 2 </Link>
-     </li>
-     <li>
-       <Link href="/labs/lab3" id="wd-lab3-link">
-         Lab 3 </Link>
-     </li>
-     <li>
-       <Link href="/" id="wd-lab3-link">
-         Kambaz </Link> </li>
-   </ul>
-);}
+  return (
+    <Nav variant="pills">
+      <NavItem>
+        <NavLink as={Link} href="/labs">
+          Labs
+        </NavLink>
+      </NavItem>
+
+      <NavItem>
+        <NavLink as={Link} href="/labs/lab1">
+          Lab 1
+        </NavLink>
+      </NavItem>
+
+      <NavItem>
+        <NavLink as={Link} href="/labs/lab2">
+          Lab 2
+        </NavLink>
+      </NavItem>
+
+      <NavItem>
+        <NavLink as={Link} href="/labs/lab3">
+          Lab 3
+        </NavLink>
+      </NavItem>
+
+      <NavItem>
+        <NavLink as={Link} href="/">
+          Kambaz
+        </NavLink>
+      </NavItem>
+
+      <NavItem>
+        <NavLink href="https://github.com/redyalredy">
+          My Github
+        </NavLink>
+      </NavItem>
+    </Nav>
+  );
+}

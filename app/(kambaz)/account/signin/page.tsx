@@ -1,12 +1,34 @@
+"use client";
 import Link from "next/link";
+import { Row, Col, Card, Form, Button } from "react-bootstrap";
 export default function Signin() {
- return (
-   <div id="wd-signin-screen">
-     <h3>Sign in</h3>
-     <input placeholder="username" className="wd-username" /> <br />
-     <input placeholder="password" type="password" className="wd-password" /> <br />
-     <Link href="/dashboard" id="wd-signin-btn"> Sign in </Link> <br />
-     <Link href="signup" id="wd-signup-link"> Sign up </Link>
-   </div>
-);}
+  return (
+    <div
+      className="d-flex justify-content-center align-items-center"
+      style={{ height: "80vh" }}
+    >
+      <Card className="p-4" style={{ width: "400px" }}>
+        <h2 className="mb-4 text-center">Signin</h2>
+
+        <Form>
+          <Form.Group className="mb-3">
+            <Form.Control placeholder="Username" />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Control type="password" placeholder="Password" />
+          </Form.Group>
+
+          <Link href="/account/profile" className="d-grid mb-3">
+            <Button variant="primary">Signin</Button>
+          </Link>
+
+          <div className="text-center">
+            <Link href="/account/signup">Signup</Link>
+          </div>
+        </Form>
+      </Card>
+    </div>
+  );
+}
 

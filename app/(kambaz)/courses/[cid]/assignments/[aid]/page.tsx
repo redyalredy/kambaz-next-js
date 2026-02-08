@@ -1,109 +1,126 @@
+"use client";
+import { FormGroup, FormLabel, FormControl, Row, Col, FormSelect, FormCheck, Button, Form, Card } from "react-bootstrap";
+
 export default function AssignmentEditor() {
     return (
-      <div id="wd-assignments-editor">
-        <label htmlFor="wd-name">Assignment Name</label> 
-        <br/>
-        <br/>
-        <input id="wd-name" defaultValue="A1 - ENV + HTML" /><br /><br />
-        <textarea id="wd-description"
+      <Form className="p-4" id="wd-assignments-editor">
+      {/* Assignment Name */}
+      <Form.Group className="mb-3" controlId="wd-name">
+        <Form.Label>Assignment Name</Form.Label>
+        <Form.Control type="text" defaultValue="A1 - ENV + HTML" />
+      </Form.Group>
+
+      {/* Description */}
+      <Form.Group className="mb-3" controlId="wd-description">
+        <Form.Label>Description</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={3}
           defaultValue="The assignment is available online Submit a link to the landing page of"
         />
-        <br />
-        <table>
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-points">Points</label>
-            </td>
-            <td>
-              <input id="wd-points" defaultValue={100} />
-            </td>
-          </tr>
+      </Form.Group>
 
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-assignment-group">Assignment Group</label>
-            </td>
-            <td>
-              <select>
-                <option value="Assignments">ASSIGNMENTS</option>
-              </select>
-            </td>
-          </tr>
+      {/* Points */}
+      <Row className="mb-3 align-items-center">
+        <Col sm={3} className="text-end">
+          Points
+        </Col>
+        <Col sm={9}>
+          <Form.Control type="number" defaultValue={100} />
+        </Col>
+      </Row>
 
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-display-grade">Display Grade as</label>
-            </td>
-            <td>
-              <select className="wd-btn" id="wd-display-grade" defaultValue="Percentage">
-                  <option value="Letter">Letter</option>
-                  <option value="Points">Points</option>
-                  <option value="Percentage">Percentage</option>
-              </select>
-            </td>
-          </tr>
+      {/* Assignment Group */}
+      <Row className="mb-3 align-items-center">
+        <Col sm={3} className="text-end">
+          Assignment Group
+        </Col>
+        <Col sm={9}>
+          <Form.Select defaultValue="Assignments">
+            <option value="Assignments">ASSIGNMENTS</option>
+          </Form.Select>
+        </Col>
+      </Row>
 
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-submission">Submission Type</label>
-            </td>
-            <td>
-              <select className="wd-btn" id="wd-submission-type" defaultValue="Online">
-                  <option value="InPerson">InPerson</option>
-                  <option value="Online">Online</option>
-              </select>
-              <br/>
+      {/* Display Grade As */}
+      <Row className="mb-3 align-items-center">
+        <Col sm={3} className="text-end">
+          Display Grade As
+        </Col>
+        <Col sm={9}>
+          <Form.Select defaultValue="Percentage">
+            <option value="Letter">Letter</option>
+            <option value="Points">Points</option>
+            <option value="Percentage">Percentage</option>
+          </Form.Select>
+        </Col>
+      </Row>
 
-            <label>Online Entry Options</label><br/>
-              <input type="checkbox" name="check-entry" id="wd-chkbox-text"/>
-              <label htmlFor="wd-chkbox-text">Text Entry</label><br/>
+      {/* Submission Type */}
+      <Row className="mb-3 align-items-start">
+        <Col sm={3} className="text-end">
+          Submission Type
+        </Col>
+        <Col sm={9}>
+          <Card className="p-3">
+            <Form.Select defaultValue="Online">
+              <option value="InPerson">InPerson</option>
+              <option value="Online">Online</option>
+            </Form.Select>
 
-              <input type="checkbox" name="check-entry" id="wd-chkbox-website"/>
-              <label htmlFor="wd-chkbox-website">Website URL</label><br/>
+            <Form.Label className="mt-3">Online Entry Options</Form.Label>
+            <div className="ms-3">
+              <Form.Check type="checkbox" id="wd-chkbox-text" label="Text Entry" />
+              <Form.Check type="checkbox" id="wd-chkbox-website" label="Website URL" />
+              <Form.Check type="checkbox" id="wd-chkbox-media" label="Media Recordings" />
+              <Form.Check type="checkbox" id="wd-chkbox-student" label="Student Annotations" />
+              <Form.Check type="checkbox" id="wd-chkbox-file" label="File Uploads" />
+            </div>
+          </Card>
+        </Col>
+      </Row>
 
-              <input type="checkbox" name="check-entry" id="wd-chkbox-media"/>
-              <label htmlFor="wd-chkbox-media">Media Recordings</label><br/>
+      {/* Assign box with label on left */}
+      <Row className="mb-3 align-items-start">
+        <Col sm={3} className="text-end">
+          Assign
+        </Col>
+        <Col sm={9}>
+          <Card className="p-3">
+            <Form.Group className="mb-3">
+              <Form.Label>Assign To</Form.Label>
+              <Form.Control type="text" defaultValue="Everyone" />
+            </Form.Group>
 
-              <input type="checkbox" name="check-entry" id="wd-chkbox-student"/>
-              <label htmlFor="wd-chkbox-student">Student Annotations</label><br/>
+            <Form.Group className="mb-3">
+              <Form.Label>Due</Form.Label>
+              <Form.Control type="date" defaultValue="2026-11-25" />
+            </Form.Group>
 
-              <input type="checkbox" name="check-entry" id="wd-chkbox-file"/>
-              <label htmlFor="wd-chkbox-file">File Uploads</label>
-            </td>
-          </tr>
+            <Row>
+              <Col>
+                <Form.Group>
+                  <Form.Label>Available From</Form.Label>
+                  <Form.Control type="date" defaultValue="2026-11-22" />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group>
+                  <Form.Label>Until</Form.Label>
+                  <Form.Control type="date" defaultValue="2026-11-25" />
+                </Form.Group>
+              </Col>
+            </Row>
+          </Card>
+        </Col>
+      </Row>
 
-          <tr>
-            <td align="right" valign="top">Assign</td>
-            <td>
-              <label htmlFor="wd-assign">Assign to</label>
-              <br/>
-              <input id="wd-assign" defaultValue="Everyone" />
-              <br/>
-              <label htmlFor="wd-due-date">Due</label>
-              <br/>
-              <input type="date" id="wd-due-date" name="wd-due-date" defaultValue="2026-11-25"/>
-              <br/>
-              <table>
-                <tr>
-                  <td>
-                  <label htmlFor="wd-available">Available from</label>
-            <br/>
-              <input type="date" id="wd-available" name="wd-available" defaultValue="2026-11-22"/>
-                  </td>
-                  <td>
-                  <label htmlFor="wd-until">Until</label> <br/>
-              <input type="date" id="wd-until" name="wd-until" defaultValue="2026-11-25"/>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
-
-        <hr />
-        <button className="wd-assignment-button">Cancel</button>
-        <button className="wd-assignment-button">Save</button>
+      <hr />
+      <div className="d-flex justify-content-end gap-2">
+        <Button variant="secondary">Cancel</Button>
+        <Button variant="primary">Save</Button>
       </div>
+    </Form>
   );}
   
   
