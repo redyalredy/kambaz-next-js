@@ -4,13 +4,11 @@ import { FormGroup, FormLabel, FormControl, Row, Col, FormSelect, FormCheck, But
 export default function AssignmentEditor() {
     return (
       <Form className="p-4" id="wd-assignments-editor">
-      {/* Assignment Name */}
       <Form.Group className="mb-3" controlId="wd-name">
         <Form.Label>Assignment Name</Form.Label>
         <Form.Control type="text" defaultValue="A1 - ENV + HTML" />
       </Form.Group>
 
-      {/* Description */}
       <Form.Group className="mb-3" controlId="wd-description">
         <Form.Label>Description</Form.Label>
         <Form.Control
@@ -20,7 +18,6 @@ export default function AssignmentEditor() {
         />
       </Form.Group>
 
-      {/* Points */}
       <Row className="mb-3 align-items-center">
         <Col sm={3} className="text-end">
           Points
@@ -30,7 +27,6 @@ export default function AssignmentEditor() {
         </Col>
       </Row>
 
-      {/* Assignment Group */}
       <Row className="mb-3 align-items-center">
         <Col sm={3} className="text-end">
           Assignment Group
@@ -42,7 +38,6 @@ export default function AssignmentEditor() {
         </Col>
       </Row>
 
-      {/* Display Grade As */}
       <Row className="mb-3 align-items-center">
         <Col sm={3} className="text-end">
           Display Grade As
@@ -56,7 +51,6 @@ export default function AssignmentEditor() {
         </Col>
       </Row>
 
-      {/* Submission Type */}
       <Row className="mb-3 align-items-start">
         <Col sm={3} className="text-end">
           Submission Type
@@ -80,7 +74,6 @@ export default function AssignmentEditor() {
         </Col>
       </Row>
 
-      {/* Assign box with label on left */}
       <Row className="mb-3 align-items-start">
         <Col sm={3} className="text-end">
           Assign
