@@ -60,7 +60,6 @@ export default function Assignments() {
                   </div>
                 </Link>
 
-                {/* Info below the assignment */}
                 <div className="small mt-1">
                   <div>
                     <span className="text-danger">Multiple Modules</span>
