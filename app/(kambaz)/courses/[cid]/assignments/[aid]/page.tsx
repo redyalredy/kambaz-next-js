@@ -1,36 +1,37 @@
 "use client";
+import { useParams } from "next/navigation";
+import Link from "next/link";
 import { FormGroup, FormLabel, FormControl, Row, Col, FormSelect, FormCheck, Button, Form, Card } from "react-bootstrap";
+import assignmentsData from "../../../../database/assignments.json";
 
 export default function AssignmentEditor() {
-    return (
-      <Form className="p-4" id="wd-assignments-editor">
+  const { cid, aid } = useParams();
+  const assignment = assignmentsData.find(a => a.course === cid && a._id === aid);
+
+  if (!assignment) return <p>Assignment not found!</p>;
+
+  return (
+    <Form className="p-4" id="wd-assignments-editor">
+      
       <Form.Group className="mb-3" controlId="wd-name">
         <Form.Label>Assignment Name</Form.Label>
-        <Form.Control type="text" defaultValue="A1 - ENV + HTML" />
+        <Form.Control type="text" defaultValue={assignment.title} />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="wd-description">
         <Form.Label>Description</Form.Label>
-        <Form.Control
-          as="textarea"
-          rows={3}
-          defaultValue="The assignment is available online Submit a link to the landing page of"
-        />
+        <Form.Control as="textarea" rows={3} defaultValue={assignment.description} />
       </Form.Group>
 
       <Row className="mb-3 align-items-center">
-        <Col sm={3} className="text-end">
-          Points
-        </Col>
+        <Col sm={3} className="text-end">Points</Col>
         <Col sm={9}>
-          <Form.Control type="number" defaultValue={100} />
+          <Form.Control type="number" defaultValue={assignment.points} />
         </Col>
       </Row>
 
       <Row className="mb-3 align-items-center">
-        <Col sm={3} className="text-end">
-          Assignment Group
-        </Col>
+        <Col sm={3} className="text-end">Assignment Group</Col>
         <Col sm={9}>
           <Form.Select defaultValue="Assignments">
             <option value="Assignments">ASSIGNMENTS</option>
@@ -39,9 +40,7 @@ export default function AssignmentEditor() {
       </Row>
 
       <Row className="mb-3 align-items-center">
-        <Col sm={3} className="text-end">
-          Display Grade As
-        </Col>
+        <Col sm={3} className="text-end">Display Grade As</Col>
         <Col sm={9}>
           <Form.Select defaultValue="Percentage">
             <option value="Letter">Letter</option>
@@ -52,9 +51,7 @@ export default function AssignmentEditor() {
       </Row>
 
       <Row className="mb-3 align-items-start">
-        <Col sm={3} className="text-end">
-          Submission Type
-        </Col>
+        <Col sm={3} className="text-end">Submission Type</Col>
         <Col sm={9}>
           <Card className="p-3">
             <Form.Select defaultValue="Online">
@@ -75,9 +72,7 @@ export default function AssignmentEditor() {
       </Row>
 
       <Row className="mb-3 align-items-start">
-        <Col sm={3} className="text-end">
-          Assign
-        </Col>
+        <Col sm={3} className="text-end">Assign</Col>
         <Col sm={9}>
           <Card className="p-3">
             <Form.Group className="mb-3">
@@ -87,20 +82,20 @@ export default function AssignmentEditor() {
 
             <Form.Group className="mb-3">
               <Form.Label>Due</Form.Label>
-              <Form.Control type="date" defaultValue="2026-11-25" />
+              <Form.Control type="date" defaultValue={assignment.dueDate} />
             </Form.Group>
 
             <Row>
               <Col>
                 <Form.Group>
                   <Form.Label>Available From</Form.Label>
-                  <Form.Control type="date" defaultValue="2026-11-22" />
+                  <Form.Control type="date" defaultValue={assignment.availableFrom} />
                 </Form.Group>
               </Col>
               <Col>
                 <Form.Group>
                   <Form.Label>Until</Form.Label>
-                  <Form.Control type="date" defaultValue="2026-11-25" />
+                  <Form.Control type="date" defaultValue={assignment.dueDate} />
                 </Form.Group>
               </Col>
             </Row>
@@ -110,10 +105,9 @@ export default function AssignmentEditor() {
 
       <hr />
       <div className="d-flex justify-content-end gap-2">
-        <Button variant="secondary">Cancel</Button>
-        <Button variant="primary">Save</Button>
+        <Link href={`/courses/${cid}/assignments`} className="btn btn-secondary">Cancel</Link>
+        <Link href={`/courses/${cid}/assignments`} className="btn btn-danger">Save</Link>
       </div>
     </Form>
-  );}
-  
-  
+  );
+}

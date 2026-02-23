@@ -55,3 +55,35 @@ body   {
   .wd-search-input {
     padding-left: 40px !important; 
   }
+
+  .wd-nav-link.active {
+  color: black !important;
+  text-decoration: none;
+  background-color: transparent !important;
+  position: relative; 
+  padding-left: 12px; 
+}
+
+.wd-nav-link.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;       
+  background-color: black;
+}
+
+.wd-nav-link.inactive {
+  color: var(--bs-danger) !important;
+  text-decoration: none;
+  background-color: transparent !important;
+  padding-left: 12px; 
+}
+
+.wd-nav-link.active,
+.wd-nav-link.inactive {
+  display: block;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
