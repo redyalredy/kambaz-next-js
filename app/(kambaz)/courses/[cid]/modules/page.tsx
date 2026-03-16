@@ -17,8 +17,9 @@ export default function Modules() {
   const { modules } = useSelector((state: RootState) => state.modulesReducer);
   const { currentUser } = useSelector((state: RootState) => state.accountReducer) as any;
 
-  const canEdit = currentUser && (currentUser.role === "teacher" || currentUser.role === "ta");
-
+  const canEdit =
+  currentUser &&
+  (currentUser.role === "FACULTY" || currentUser.role === "TA");
   const dispatch = useDispatch();
 
   return (
