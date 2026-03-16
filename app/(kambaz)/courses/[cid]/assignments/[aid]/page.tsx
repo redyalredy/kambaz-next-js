@@ -1,52 +1,102 @@
 "use client";
-import { useParams } from "next/navigation";
-import Link from "next/link";
-import { FormGroup, FormLabel, FormControl, Row, Col, FormSelect, FormCheck, Button, Form, Card } from "react-bootstrap";
-import assignmentsData from "../../../../database/assignments.json";
+
+import { useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { Form, Row, Col, Card, FormSelect, FormCheck, FormControl, Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../../store";
+import { addAssignment, updateAssignment } from "../../../reducer";
 
 export default function AssignmentEditor() {
   const { cid, aid } = useParams();
-  const assignment = assignmentsData.find(a => a.course === cid && a._id === aid);
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const courseId = Array.isArray(cid) ? cid[0] : cid;
 
-  if (!assignment) return <p>Assignment not found!</p>;
+  const { currentUser } = useSelector((state: RootState) => state.accountReducer) as any;
+  const isStudent = currentUser?.role === "STUDENT";
+  const canEdit = !isStudent;
+
+  const assignments = useSelector((state: RootState) => state.coursesReducer.assignments);
+  const existingAssignment = aid
+    ? assignments.find(a => a.course === courseId && a._id === aid)
+    : undefined;
+
+  const [assignment, setAssignment] = useState<any>(
+    existingAssignment || {
+      _id: "",
+      title: "",
+      description: "",
+      course: courseId,
+      points: 100,
+      dueDate: "",
+      availableFrom: "",
+      availableUntil: "",
+      group: "Assignments",
+      gradeDisplay: "Percentage",
+      submissionType: "Online",
+    }
+  );
+
+  const isNew = !existingAssignment;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setAssignment({ ...assignment, [name]: value });
+  };
+
+  const handleSave = () => {
+    if (isNew) {
+      dispatch(addAssignment({ ...assignment, _id: crypto.randomUUID() }));
+    } else {
+      dispatch(updateAssignment(assignment));
+    }
+    router.push(`/courses/${courseId}/assignments`);
+  };
+
+  const handleCancel = () => router.push(`/courses/${courseId}/assignments`);
+
+  if (isStudent) return null; 
 
   return (
     <Form className="p-4" id="wd-assignments-editor">
-      
-      <Form.Group className="mb-3" controlId="wd-name">
+      <h2>{isNew ? "Add Assignment" : "Edit Assignment"}</h2>
+      <hr />
+
+      <Form.Group className="mb-3">
         <Form.Label>Assignment Name</Form.Label>
-        <Form.Control type="text" defaultValue={assignment.title} />
+        <Form.Control type="text" name="title" value={assignment.title} onChange={handleChange} />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="wd-description">
+      <Form.Group className="mb-3">
         <Form.Label>Description</Form.Label>
-        <Form.Control as="textarea" rows={3} defaultValue={assignment.description} />
+        <Form.Control as="textarea" rows={3} name="description" value={assignment.description} onChange={handleChange} />
       </Form.Group>
 
       <Row className="mb-3 align-items-center">
         <Col sm={3} className="text-end">Points</Col>
         <Col sm={9}>
-          <Form.Control type="number" defaultValue={assignment.points} />
+          <Form.Control type="number" name="points" value={assignment.points} onChange={handleChange} />
         </Col>
       </Row>
 
       <Row className="mb-3 align-items-center">
         <Col sm={3} className="text-end">Assignment Group</Col>
         <Col sm={9}>
-          <Form.Select defaultValue="Assignments">
-            <option value="Assignments">ASSIGNMENTS</option>
-          </Form.Select>
+          <FormSelect name="group" value={assignment.group} onChange={handleChange}>
+            <option value="Assignments">Assignments</option>
+          </FormSelect>
         </Col>
       </Row>
 
       <Row className="mb-3 align-items-center">
         <Col sm={3} className="text-end">Display Grade As</Col>
         <Col sm={9}>
-          <Form.Select defaultValue="Percentage">
+          <FormSelect name="gradeDisplay" value={assignment.gradeDisplay} onChange={handleChange}>
             <option value="Letter">Letter</option>
             <option value="Points">Points</option>
             <option value="Percentage">Percentage</option>
-          </Form.Select>
+          </FormSelect>
         </Col>
       </Row>
 
@@ -54,18 +104,18 @@ export default function AssignmentEditor() {
         <Col sm={3} className="text-end">Submission Type</Col>
         <Col sm={9}>
           <Card className="p-3">
-            <Form.Select defaultValue="Online">
+            <FormSelect name="submissionType" value={assignment.submissionType} onChange={handleChange}>
               <option value="InPerson">InPerson</option>
               <option value="Online">Online</option>
-            </Form.Select>
+            </FormSelect>
 
             <Form.Label className="mt-3">Online Entry Options</Form.Label>
             <div className="ms-3">
-              <Form.Check type="checkbox" id="wd-chkbox-text" label="Text Entry" />
-              <Form.Check type="checkbox" id="wd-chkbox-website" label="Website URL" />
-              <Form.Check type="checkbox" id="wd-chkbox-media" label="Media Recordings" />
-              <Form.Check type="checkbox" id="wd-chkbox-student" label="Student Annotations" />
-              <Form.Check type="checkbox" id="wd-chkbox-file" label="File Uploads" />
+              <FormCheck type="checkbox" label="Text Entry" />
+              <FormCheck type="checkbox" label="Website URL" />
+              <FormCheck type="checkbox" label="Media Recordings" />
+              <FormCheck type="checkbox" label="Student Annotations" />
+              <FormCheck type="checkbox" label="File Uploads" />
             </div>
           </Card>
         </Col>
@@ -82,20 +132,20 @@ export default function AssignmentEditor() {
 
             <Form.Group className="mb-3">
               <Form.Label>Due</Form.Label>
-              <Form.Control type="date" defaultValue={assignment.dueDate} />
+              <Form.Control type="date" name="dueDate" value={assignment.dueDate} onChange={handleChange} />
             </Form.Group>
 
             <Row>
               <Col>
                 <Form.Group>
                   <Form.Label>Available From</Form.Label>
-                  <Form.Control type="date" defaultValue={assignment.availableFrom} />
+                  <Form.Control type="date" name="availableFrom" value={assignment.availableFrom} onChange={handleChange} />
                 </Form.Group>
               </Col>
               <Col>
                 <Form.Group>
                   <Form.Label>Until</Form.Label>
-                  <Form.Control type="date" defaultValue={assignment.dueDate} />
+                  <Form.Control type="date" name="availableUntil" value={assignment.availableUntil} onChange={handleChange} />
                 </Form.Group>
               </Col>
             </Row>
@@ -105,8 +155,8 @@ export default function AssignmentEditor() {
 
       <hr />
       <div className="d-flex justify-content-end gap-2">
-        <Link href={`/courses/${cid}/assignments`} className="btn btn-secondary">Cancel</Link>
-        <Link href={`/courses/${cid}/assignments`} className="btn btn-danger">Save</Link>
+        <Button variant="secondary" onClick={handleCancel}>Cancel</Button>
+        <Button variant="primary" onClick={handleSave}>{isNew ? "Add" : "Update"}</Button>
       </div>
     </Form>
   );

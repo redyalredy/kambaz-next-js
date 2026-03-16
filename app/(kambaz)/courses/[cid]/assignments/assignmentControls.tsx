@@ -1,34 +1,62 @@
-import { InputGroup, FormControl, Button } from "react-bootstrap";
-import InputGroupText from "react-bootstrap/esm/InputGroupText";
+"use client";
+
+import { FormControl, Button } from "react-bootstrap";
 import { FaPlus, FaSearch } from "react-icons/fa";
+import { useRouter, useParams } from "next/navigation";
+import { RootState } from "../../../store";
+import { useSelector } from "react-redux";
 
-export default function AssignmentControls() {
-    return (
-        <div
-            id="wd-assignment-controls"
-            className="d-flex justify-content-between align-items-center mb-4"
-        >
-            <div className="wd-search-wrapper">
-                <FaSearch className="wd-search-icon" />
-                <FormControl
-                    size="lg"
-                    placeholder="Search..."
-                    id="wd-search-assignment"
-                    className="wd-search-input"
-                />
-            </div>
+interface AssignmentControlsProps {
+  canEdit: boolean;
+}
 
-            <div>
-                <Button variant="secondary" size="lg" className="me-2">
-                    <FaPlus className="me-2" />
-                    Group
-                </Button>
+export default function AssignmentControls({ canEdit }: AssignmentControlsProps) {
+  const router = useRouter();
+  const { cid } = useParams();
 
-                <Button variant="danger" size="lg">
-                    <FaPlus className="me-2" />
-                    Assignment
-                </Button>
-            </div>
+  const { currentUser } = useSelector(
+    (state: RootState) => state.accountReducer
+  ) as any;
+
+  if (!currentUser || currentUser.role === "STUDENT") return null;
+
+  const handleAddAssignment = () => {
+    router.push(`/courses/${cid}/assignments/new`);
+  };
+
+  return (
+    <div
+      id="wd-assignment-controls"
+      className="d-flex justify-content-between align-items-center mb-4"
+    >
+      <div className="wd-search-wrapper">
+        <FaSearch className="wd-search-icon" />
+        <FormControl
+          size="lg"
+          placeholder="Search..."
+          id="wd-search-assignment"
+          className="wd-search-input"
+          disabled={!canEdit} 
+        />
+      </div>
+
+      {canEdit && (
+        <div>
+          <Button variant="secondary" size="lg" className="me-2">
+            <FaPlus className="me-2" />
+            Group
+          </Button>
+
+          <Button
+            variant="danger"
+            size="lg"
+            onClick={handleAddAssignment}
+          >
+            <FaPlus className="me-2" />
+            Assignment
+          </Button>
         </div>
-    )
+      )}
+    </div>
+  );
 }

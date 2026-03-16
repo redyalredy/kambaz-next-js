@@ -1,34 +1,72 @@
 "use client";
 import Link from "next/link";
-import { Row, Col, Card, Form, Button } from "react-bootstrap";
+import { redirect } from "next/navigation";
+import { setCurrentUser } from "../reducer";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import * as db from "../../database";
+import { Row, Col, Card, Form, Button, FormControl } from "react-bootstrap";
+
 export default function Signin() {
-  return (
-    <div
-      className="d-flex justify-content-center align-items-center"
-      style={{ height: "80vh" }}
-    >
-      <Card className="p-4" style={{ width: "400px" }}>
-        <h2 className="mb-4 text-center">Signin</h2>
+  const [credentials, setCredentials] = useState<any>({});
+  const dispatch = useDispatch();
+  const signin = () => {
+    const user = db.users.find(
+      (u: any) =>
+        u.username === credentials.username &&
+        u.password === credentials.password
+    );
+    if (!user) return;
+    dispatch(setCurrentUser(user));
+    redirect("/dashboard");
+  };
+ 
+return (
+  <div
+    className="d-flex justify-content-center align-items-center"
+    style={{ height: "80vh" }}
+  >
+    <Card className="p-4" style={{ width: "400px" }}>
+      <h2 className="mb-4 text-center">Signin</h2>
 
-        <Form>
-          <Form.Group className="mb-3">
-            <Form.Control placeholder="Username" />
-          </Form.Group>
+      <div id="wd-signin-screen">
+        <FormControl
+          defaultValue={credentials.username}
+          onChange={(e) =>
+            setCredentials({ ...credentials, username: e.target.value })
+          }
+          className="mb-3"
+          placeholder="Username"
+          id="wd-username"
+        />
 
-          <Form.Group className="mb-3">
-            <Form.Control type="password" placeholder="Password" />
-          </Form.Group>
+        <FormControl
+          defaultValue={credentials.password}
+          onChange={(e) =>
+            setCredentials({ ...credentials, password: e.target.value })
+          }
+          className="mb-3"
+          placeholder="Password"
+          type="password"
+          id="wd-password"
+        />
 
-          <Link href="/account/profile" className="d-grid mb-3">
-            <Button variant="primary">Signin</Button>
+        <Button
+          onClick={signin}
+          id="wd-signin-btn"
+          variant="primary"
+          className="w-100 mb-3"
+        >
+          Signin
+        </Button>
+
+        <div className="text-center">
+          <Link id="wd-signup-link" href="/account/signup">
+            Signup
           </Link>
-
-          <div className="text-center">
-            <Link href="/account/signup">Signup</Link>
-          </div>
-        </Form>
-      </Card>
-    </div>
-  );
-}
-
+        </div>
+      </div>
+    </Card>
+  </div>
+);
+        }

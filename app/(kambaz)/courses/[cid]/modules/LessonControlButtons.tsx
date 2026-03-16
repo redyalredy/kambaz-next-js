@@ -1,9 +1,17 @@
-import { IoEllipsisVertical } from "react-icons/io5";
-import GreenCheckmark from "./GreenCheckmark";
-export default function LessonControlButtons() {
-  return (
-    <div className="float-end">
-      <GreenCheckmark />
-      <IoEllipsisVertical className="fs-4" />
-    </div> );}
+import { Button } from "react-bootstrap";
 
+interface LessonControlButtonsProps {
+  lesson: any;
+  canEdit: boolean; 
+}
+
+export default function LessonControlButtons({ lesson, canEdit }: LessonControlButtonsProps) {
+  if (!canEdit) return null; 
+
+  return (
+    <div>
+      <Button size="sm" variant="warning" className="me-2">Edit</Button>
+      <Button size="sm" variant="danger">Delete</Button>
+    </div>
+  );
+}
