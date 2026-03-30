@@ -21,6 +21,10 @@ export default function labs() {
            Lab 4: Maintaining State in React Applications </Link>
        </li>
        <li>
+         <Link href="/labs/lab5" id="wd-lab4-link">
+           Lab 5: Next.js Web Applications </Link>
+       </li>
+       <li>
         <Link href="/" id="wd-lab3-link">
          Kambaz </Link> 
         </li>

@@ -1,7 +1,21 @@
 "use client";
 import Link from "next/link";
-import { Card, Form, Button } from "react-bootstrap";
+import { redirect } from "next/navigation";
+import { setCurrentUser } from "../reducer";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { FormControl, Button } from "react-bootstrap";
+import * as client from "../client";
+import { Card, Form } from "react-bootstrap";
 export default function Signup() {
+  const [user, setUser] = useState<any>({});
+  const dispatch = useDispatch();
+  const signup = async () => {
+    const currentUser = await client.signup(user);
+    dispatch(setCurrentUser(currentUser));
+    redirect("/profile");
+  };
+
   return (
     <div
       className="d-flex justify-content-center align-items-center"
@@ -20,7 +34,7 @@ export default function Signup() {
           </Form.Group>
 
           <Link href="/account/profile" className="d-grid mb-3">
-            <Button variant="primary">Signup</Button>
+            <Button onClick={signup} variant="primary">Signup</Button>
           </Link>
 
           <div className="text-center">
