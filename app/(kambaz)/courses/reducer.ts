@@ -71,6 +71,7 @@ const coursesSlice = createSlice({
 });
 
 export const {
+  setCourses,
   addNewCourse,
   deleteCourse,
   updateCourse,
