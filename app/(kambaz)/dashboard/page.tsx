@@ -15,15 +15,10 @@ import {
 } from "react-bootstrap";
 
 import { useSelector, useDispatch } from "react-redux";
-import {
-  addNewCourse,
-  deleteCourse,
-  updateCourse,
-  setCourses,
-} from "../courses/reducer";
-
+import { setCourses } from "../courses/reducer";
 import { RootState } from "../store";
-import * as client from "../courses/client";
+import * as coursesClient from "../courses/client";
+import * as enrollmentsClient from "../courses/enrollments/client";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -39,6 +34,9 @@ export default function Dashboard() {
   const isStudent = currentUser?.role === "STUDENT";
   const canEdit = currentUser && !isStudent;
 
+  const [showAll, setShowAll] = useState(false);
+  const [allCourses, setAllCourses] = useState<any[]>([]);
+
   const [course, setCourse] = useState<any>({
     _id: "0",
     name: "New Course",
@@ -49,45 +47,83 @@ export default function Dashboard() {
     description: "New Description",
   });
 
-  const fetchCourses = async () => {
+  const fetchMyCourses = async () => {
     try {
-      const courses = await client.findMyCourses();
-      dispatch(setCourses(courses));
+      const myCourses = await enrollmentsClient.findMyCourses();
+      dispatch(setCourses(myCourses));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchAllCourses = async () => {
+    try {
+      const all = await coursesClient.fetchAllCourses();
+      setAllCourses(all);
     } catch (error) {
       console.error(error);
     }
   };
 
   const onAddNewCourse = async () => {
-    const newCourse = await client.createCourse(course);
-    dispatch(setCourses([ ...courses, newCourse ]));
+    const newCourse = await coursesClient.createCourse(course);
+    dispatch(setCourses([...courses, newCourse]));
   };
 
   const onDeleteCourse = async (courseId: string) => {
-    const status = await client.deleteCourse(courseId);
+    await coursesClient.deleteCourse(courseId);
     dispatch(setCourses(courses.filter((course) => course._id !== courseId)));
+    setAllCourses(allCourses.filter((course) => course._id !== courseId));
   };
 
   const onUpdateCourse = async () => {
-    await client.updateCourse(course);
-    dispatch(setCourses(courses.map((c) => {
-        if (c._id === course._id) { return course; }
-        else { return c; }
-    })));};
+    await coursesClient.updateCourse(course);
+    dispatch(
+      setCourses(
+        courses.map((c) => (c._id === course._id ? course : c))
+      )
+    );
+    setAllCourses(
+      allCourses.map((c) => (c._id === course._id ? course : c))
+    );
+  };
 
+  const onEnroll = async (courseId: string) => {
+    await enrollmentsClient.enrollInCourse(courseId);
+    await fetchMyCourses();
+  };
+
+  const onUnenroll = async (courseId: string) => {
+    await enrollmentsClient.unenrollFromCourse(courseId);
+    await fetchMyCourses();
+  };
 
   useEffect(() => {
     if (currentUser) {
-      fetchCourses();
+      fetchMyCourses();
+      fetchAllCourses();
     }
   }, [currentUser]);
 
   if (!currentUser) return <div>Loading...</div>;
 
+  const enrolledCourseIds = new Set(courses.map((c: any) => c._id));
+  const visibleCourses = isStudent
+    ? showAll
+      ? allCourses
+      : courses
+    : courses;
+
   return (
     <div className="p-4">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h1>Dashboard</h1>
+
+        {isStudent && (
+          <Button onClick={() => setShowAll(!showAll)} variant="primary">
+            {showAll ? "Show My Courses" : "Show All Courses"}
+          </Button>
+        )}
       </div>
 
       <hr />
@@ -98,17 +134,11 @@ export default function Dashboard() {
             <h5 className="mb-0">New Course</h5>
 
             <div className="d-flex gap-2">
-              <Button
-                onClick={onAddNewCourse}
-                variant="primary"
-              >
+              <Button onClick={onAddNewCourse} variant="primary">
                 Add
               </Button>
 
-              <Button
-                onClick={onUpdateCourse}
-                variant="warning"
-              >
+              <Button onClick={onUpdateCourse} variant="warning">
                 Update
               </Button>
             </div>
@@ -140,57 +170,81 @@ export default function Dashboard() {
       )}
 
       <Row xs={1} md={4} className="g-4">
-        {courses.map((c) => (
-          <Col key={c._id}>
-            <Card>
-              <CardImg
-                src={c.image || "/images/react.jpg"}
-                height={160}
-              />
+        {visibleCourses.map((c: any) => {
+          const isEnrolled = enrolledCourseIds.has(c._id);
 
-              <CardBody>
-                <CardTitle>{c.name}</CardTitle>
+          return (
+            <Col key={c._id}>
+              <Card>
+                <CardImg
+                  src={c.image || "/images/react.jpg"}
+                  height={160}
+                />
 
-                <CardText
-                  style={{
-                    height: "100px",
-                    overflowY: "auto",
-                    paddingRight: "5px",
-                  }}
-                >
-                  {c.description}
-                </CardText>
+                <CardBody>
+                  <CardTitle>{c.name}</CardTitle>
 
-                <div className="d-flex justify-content-between align-items-center mt-2">
-                  <Link href={`/courses/${c._id}/home`}>
-                    <Button variant="primary">Go</Button>
-                  </Link>
+                  <CardText
+                    style={{
+                      height: "100px",
+                      overflowY: "auto",
+                      paddingRight: "5px",
+                    }}
+                  >
+                    {c.description}
+                  </CardText>
 
-                  {canEdit && (
-                    <div className="d-flex gap-2">
-                      <Button
-                        onClick={() => setCourse(c)}
-                        variant="warning"
-                      >
-                        Edit
-                      </Button>
+                  <div className="d-flex justify-content-between align-items-center mt-2">
+                    {(!showAll && (isStudent ? isEnrolled : canEdit)) && (
+                      <Link href={`/courses/${c._id}/home`}>
+                        <Button variant="primary">Go</Button>
+                      </Link>
+                    )}
 
-                      <Button
-                        onClick={(event) => {
-                          event.preventDefault();
-                          onDeleteCourse(course._id)
-                        }}
-                        variant="danger"
-                      >
-                        Delete
-                      </Button>
-                    </div>
-                  )}
-                </div>
-              </CardBody>
-            </Card>
-          </Col>
-        ))}
+                    {isStudent && showAll && (
+                      isEnrolled ? (
+                        <Button
+                          variant="danger"
+                          onClick={() => onUnenroll(c._id)}
+                        >
+                          Unenroll
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="success"
+                          onClick={() => onEnroll(c._id)}
+                        >
+                          Enroll
+                        </Button>
+                      )
+                    )}
+
+                    {canEdit && (
+                      <div className="d-flex gap-2">
+                        <Button
+                          onClick={() => setCourse(c)}
+                          variant="warning"
+                        >
+                          Edit
+                        </Button>
+
+                        <Button
+                          onClick={(event) => {
+                            event.preventDefault();
+                            onDeleteCourse(c._id);
+                          }}
+                          variant="danger"
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>
+          );
+        })}
       </Row>
     </div>
   );

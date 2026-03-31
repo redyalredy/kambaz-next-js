@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import AssignmentControls from "./assignmentControls";
@@ -10,53 +10,57 @@ import { FaRegFileAlt } from "react-icons/fa";
 import { IoEllipsisVertical } from "react-icons/io5";
 import { FaPlus } from "react-icons/fa6";
 import GreenCheckmark from "../modules/GreenCheckmark";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
-import { deleteAssignment } from "../../reducer";
+import * as client from "../assignments/client";
 
 export default function Assignments() {
   const { cid } = useParams();
   const courseId = Array.isArray(cid) ? cid[0] : cid;
 
-  const dispatch = useDispatch();
-
   const { currentUser } = useSelector(
     (state: RootState) => state.accountReducer
   ) as any;
 
-  const assignments =
-    useSelector((state: RootState) => state.coursesReducer.assignments) || [];
-
-  const courseAssignments = assignments.filter(
-    (a) => a.course === courseId
-  );
-
+  const [assignments, setAssignments] = useState<any[]>([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [assignmentToDelete, setAssignmentToDelete] = useState<string | null>(null);
+
+  const isStudent = !currentUser || currentUser.role === "STUDENT";
+
+  const loadAssignments = async () => {
+    if (!courseId) return;
+    const data = await client.findAssignmentsForCourse(courseId);
+    setAssignments(data);
+  };
+
+  useEffect(() => {
+    loadAssignments();
+  }, [courseId]);
 
   const handleDeleteClick = (id: string) => {
     setAssignmentToDelete(id);
     setShowDeleteModal(true);
   };
 
-  const confirmDelete = () => {
-    if (assignmentToDelete) dispatch(deleteAssignment(assignmentToDelete));
+  const confirmDelete = async () => {
+    if (assignmentToDelete) {
+      await client.deleteAssignment(assignmentToDelete);
+      setAssignments(assignments.filter((a) => a._id !== assignmentToDelete));
+    }
     setShowDeleteModal(false);
     setAssignmentToDelete(null);
   };
 
-  const isStudent = !currentUser || currentUser.role === "STUDENT";
-
   return (
     <div id="wd-assignments">
       <AssignmentControls canEdit={currentUser?.role !== "STUDENT"} />
-      <br /><br />
+      <br />
+      <br />
 
       <ListGroup className="rounded-0" id="wd-assignment-list">
-
         <ListGroupItem className="p-3 ps-2 fs-5 bg-light">
           <div className="d-flex align-items-center justify-content-between">
-
             <div className="d-flex align-items-center">
               <BsGripVertical className="me-2 fs-3" />
               ASSIGNMENTS
@@ -71,22 +75,18 @@ export default function Assignments() {
                 <IoEllipsisVertical className="fs-4" />
               </div>
             )}
-
           </div>
         </ListGroupItem>
 
-        {courseAssignments.map((assignment) => (
+        {assignments.map((assignment) => (
           <ListGroupItem key={assignment._id} className="wd-lesson p-3 ps-2">
-
             <div className="d-flex align-items-center justify-content-between">
-
               <div className="d-flex align-items-center">
                 <BsGripVertical className="fs-3 me-3" />
                 <FaRegFileAlt className="text-success fs-5 me-3" />
               </div>
 
               <div className="flex-grow-1">
-
                 <Link
                   href={`/courses/${courseId}/assignments/${assignment._id}`}
                   className="wd-assignment-link"
@@ -112,7 +112,6 @@ export default function Assignments() {
                     Due {assignment.dueDate} | {assignment.points} pts
                   </div>
                 </div>
-
               </div>
 
               <div className="d-flex align-items-center">
@@ -130,12 +129,9 @@ export default function Assignments() {
                   </Button>
                 )}
               </div>
-
             </div>
-
           </ListGroupItem>
         ))}
-
       </ListGroup>
 
       <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
@@ -157,7 +153,6 @@ export default function Assignments() {
           </Button>
         </Modal.Footer>
       </Modal>
-
     </div>
   );
 }

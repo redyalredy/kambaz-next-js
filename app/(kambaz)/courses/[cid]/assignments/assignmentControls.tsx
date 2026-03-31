@@ -10,9 +10,13 @@ interface AssignmentControlsProps {
   canEdit: boolean;
 }
 
-export default function AssignmentControls({ canEdit }: AssignmentControlsProps) {
+export default function AssignmentControls({
+  canEdit,
+}: AssignmentControlsProps) {
   const router = useRouter();
   const { cid } = useParams();
+
+  const courseId = Array.isArray(cid) ? cid[0] : cid;
 
   const { currentUser } = useSelector(
     (state: RootState) => state.accountReducer
@@ -21,7 +25,7 @@ export default function AssignmentControls({ canEdit }: AssignmentControlsProps)
   if (!currentUser || currentUser.role === "STUDENT") return null;
 
   const handleAddAssignment = () => {
-    router.push(`/courses/${cid}/assignments/new`);
+    router.push(`/courses/${courseId}/assignments/new`);
   };
 
   return (
@@ -36,7 +40,7 @@ export default function AssignmentControls({ canEdit }: AssignmentControlsProps)
           placeholder="Search..."
           id="wd-search-assignment"
           className="wd-search-input"
-          disabled={!canEdit} 
+          disabled={!canEdit}
         />
       </div>
 
