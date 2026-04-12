@@ -89,12 +89,12 @@ export default function Dashboard() {
   };
 
   const onEnroll = async (courseId: string) => {
-    await enrollmentsClient.enrollInCourse(courseId);
+    await enrollmentsClient.enrollIntoCourse("current", courseId);
     await fetchMyCourses();
   };
 
   const onUnenroll = async (courseId: string) => {
-    await enrollmentsClient.unenrollFromCourse(courseId);
+    await enrollmentsClient.unenrollFromCourse("current", courseId);
     await fetchMyCourses();
   };
 
@@ -109,10 +109,10 @@ export default function Dashboard() {
 
   const enrolledCourseIds = new Set(courses.map((c: any) => c._id));
   const visibleCourses = isStudent
-    ? showAll
-      ? allCourses
-      : courses
-    : courses;
+  ? showAll
+    ? allCourses
+    : courses
+  : allCourses;
 
   return (
     <div className="p-4">

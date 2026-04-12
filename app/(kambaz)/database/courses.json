@@ -1,92 +1,243 @@
 [
-    {
-      "_id": "CS1234",
-      "name": "React JS",
-      "number": "RS4550",
-      "startDate": "2023-01-10",
-      "endDate": "2023-05-15",
-      "department": "D123",
-      "credits": 4,
-      "description": "Full Stack software developer",
-      "image": "/images/reactjs.jpg"
-    },
-    {
-      "_id": "CS5678",
-      "name": "JavaScript",
-      "number": "RS4560",
-      "startDate": "2023-01-10",
-      "endDate": "2023-05-15",
-      "department": "D123",
-      "credits": 3,
-      "description": "Front-End Web Development",
-      "image": "/images/javascript.jpg"
-    },
-    {
-      "_id": "ART1429",
-      "name": "Art History",
-      "number": "RS4570",
-      "startDate": "2023-01-10",
-      "endDate": "2023-05-15",
-      "department": "D123",
-      "credits": 4,
-      "description": "The Beginnings of Art",
-      "image": "/images/arthistory.jpg"
-    },
-    {
-      "_id": "ENGW683",
-      "name": "Writing",
-      "number": "CH1230",
-      "startDate": "2023-01-10",
-      "endDate": "2023-05-15",
-      "department": "D134",
-      "credits": 3,
-      "description": "Interdisiplinary Advanced English Writing",
-      "image": "/images/writing.jpg"
-    },
-    {
-      "_id": "PHYS9963",
-      "name": "Physics",
-      "number": "CH1240",
-      "startDate": "2023-01-10",
-      "endDate": "2023-05-15",
-      "department": "D134",
-      "credits": 3,
-      "description": "Physics II",
-      "image": "/images/physics.jpg"
-    },
-    {
-      "_id": "CHEM6193",
-      "name": "Chemistry",
-      "number": "CH1250",
-      "startDate": "2023-01-10",
-      "endDate": "2023-05-15",
-      "department": "D134",
-      "credits": 3,
-      "description": "Understanding the Chemistry Around Us",
-      "image": "/images/chemistry.jpg"
-    },
-    {
-      "_id": "BIO9366",
-      "name": "Biology",
-      "number": "ME101",
-      "startDate": "2023-01-10",
-      "endDate": "2023-05-15",
-      "department": "Languages",
-      "credits": 3,
-      "description": "Understanding the Living",
-      "author": "654f9ec2ea7ead465908d1e3",
-      "image": "/images/biology.jpg"
-    },
-    {
-      "_id": "RS108",
-      "name": "Wizards, Elves, and Men: Inter-species Diplomacy in Middle-earth",
-      "number": "ME102",
-      "startDate": "2023-01-10",
-      "endDate": "2023-05-15",
-      "department": "Political Studies",
-      "credits": 4,
-      "description": "This course explores the complex relationships and diplomatic interactions among the different races of Middle-earth: Elves, Men, Dwarves, and Wizards. Topics include the study of historical alliances, conflicts, and the role of leadership and wisdom in maintaining peace. Students will engage in discussions and case studies on key events in Middle-earth's history, such as the Council of Elrond and the War of the Ring, to understand the principles of diplomacy and conflict resolution in a multi-species context.",
-      "author": "654f9ec2ea7ead465908d1e3",
-      "image": "/images/angel-falls.jpg"
-    }
-  ]
+  {
+    "_id": "CS1234",
+    "name": "React JS",
+    "number": "CS1234",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "Computer Science",
+    "credits": 4,
+    "description": "This course introduces React and modern frontend development.",
+    "modules": [
+      {
+        "_id": "M101",
+        "name": "React Fundamentals",
+        "description": "Core React concepts.",
+        "lessons": [
+          { "_id": "L101", "name": "What is React?", "description": "Intro to React." },
+          { "_id": "L102", "name": "JSX Basics", "description": "JSX syntax." },
+          { "_id": "L103", "name": "Components", "description": "Reusable UI." }
+        ]
+      },
+      {
+        "_id": "M102",
+        "name": "Hooks & State",
+        "description": "Managing state and effects.",
+        "lessons": [
+          { "_id": "L104", "name": "useState", "description": "State management." },
+          { "_id": "L105", "name": "useEffect", "description": "Side effects." }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "CS5678",
+    "name": "JavaScript",
+    "number": "CS5678",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "Computer Science",
+    "credits": 4,
+    "description": "JavaScript fundamentals.",
+    "modules": [
+      {
+        "_id": "M201",
+        "name": "JS Basics",
+        "description": "Core syntax.",
+        "lessons": [
+          { "_id": "L201", "name": "Variables", "description": "let, const." },
+          { "_id": "L202", "name": "Functions", "description": "Function basics." }
+        ]
+      },
+      {
+        "_id": "M202",
+        "name": "Async JS",
+        "description": "Async programming.",
+        "lessons": [
+          { "_id": "L203", "name": "Promises", "description": "Async handling." },
+          { "_id": "L204", "name": "Async/Await", "description": "Cleaner async." }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "ART1429",
+    "name": "Art History",
+    "number": "ART1429",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "Art and Design",
+    "credits": 3,
+    "description": "Art history overview.",
+    "modules": [
+      {
+        "_id": "M301",
+        "name": "Ancient Art",
+        "description": "Early civilizations.",
+        "lessons": [
+          { "_id": "L301", "name": "Egyptian Art", "description": "Ancient Egypt." },
+          { "_id": "L302", "name": "Greek Art", "description": "Classical period." }
+        ]
+      },
+      {
+        "_id": "M302",
+        "name": "Modern Art",
+        "description": "Modern movements.",
+        "lessons": [
+          { "_id": "L303", "name": "Impressionism", "description": "Light & color." },
+          { "_id": "L304", "name": "Abstract Art", "description": "Non-representational." }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "ENGW683",
+    "name": "Writing",
+    "number": "ENGW683",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "English",
+    "credits": 3,
+    "description": "Writing skills.",
+    "modules": [
+      {
+        "_id": "M401",
+        "name": "Grammar",
+        "description": "Writing basics.",
+        "lessons": [
+          { "_id": "L401", "name": "Sentence Structure", "description": "Basics." },
+          { "_id": "L402", "name": "Punctuation", "description": "Rules." }
+        ]
+      },
+      {
+        "_id": "M402",
+        "name": "Essays",
+        "description": "Essay writing.",
+        "lessons": [
+          { "_id": "L403", "name": "Thesis", "description": "Core idea." },
+          { "_id": "L404", "name": "Paragraphs", "description": "Structure." }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "PHYS9963",
+    "name": "Physics",
+    "number": "PHYS9963",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "Physics",
+    "credits": 4,
+    "description": "Physics basics.",
+    "modules": [
+      {
+        "_id": "M501",
+        "name": "Motion",
+        "description": "Kinematics.",
+        "lessons": [
+          { "_id": "L501", "name": "Velocity", "description": "Speed + direction." },
+          { "_id": "L502", "name": "Acceleration", "description": "Change in velocity." }
+        ]
+      },
+      {
+        "_id": "M502",
+        "name": "Forces",
+        "description": "Newton’s laws.",
+        "lessons": [
+          { "_id": "L503", "name": "Newton Laws", "description": "3 laws." },
+          { "_id": "L504", "name": "Friction", "description": "Resistance." }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "CHEM6193",
+    "name": "Chemistry",
+    "number": "CHEM6193",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "Chemistry",
+    "credits": 4,
+    "description": "Chemistry basics.",
+    "modules": [
+      {
+        "_id": "M601",
+        "name": "Atoms",
+        "description": "Atomic structure.",
+        "lessons": [
+          { "_id": "L601", "name": "Protons", "description": "Positive charge." },
+          { "_id": "L602", "name": "Electrons", "description": "Negative charge." }
+        ]
+      },
+      {
+        "_id": "M602",
+        "name": "Reactions",
+        "description": "Chemical reactions.",
+        "lessons": [
+          { "_id": "L603", "name": "Types", "description": "Reaction types." },
+          { "_id": "L604", "name": "Stoichiometry", "description": "Balancing." }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "BIO9366",
+    "name": "Biology",
+    "number": "BIO9366",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "Biology",
+    "credits": 4,
+    "description": "Biology basics.",
+    "modules": [
+      {
+        "_id": "M701",
+        "name": "Cells",
+        "description": "Cell structure.",
+        "lessons": [
+          { "_id": "L701", "name": "Cell Parts", "description": "Organelles." },
+          { "_id": "L702", "name": "Cell Membrane", "description": "Barrier." }
+        ]
+      },
+      {
+        "_id": "M702",
+        "name": "Genetics",
+        "description": "DNA & heredity.",
+        "lessons": [
+          { "_id": "L703", "name": "DNA", "description": "Genetic code." },
+          { "_id": "L704", "name": "Inheritance", "description": "Traits." }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "RS108",
+    "name": "Wizards, Elves, and Men",
+    "number": "ME102",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "Political Studies",
+    "credits": 4,
+    "description": "Middle-earth diplomacy.",
+    "modules": [
+      {
+        "_id": "M801",
+        "name": "Races",
+        "description": "Different groups.",
+        "lessons": [
+          { "_id": "L801", "name": "Elves", "description": "Immortal beings." },
+          { "_id": "L802", "name": "Men", "description": "Human kingdoms." }
+        ]
+      },
+      {
+        "_id": "M802",
+        "name": "Diplomacy",
+        "description": "Relations.",
+        "lessons": [
+          { "_id": "L803", "name": "Alliances", "description": "Cooperation." },
+          { "_id": "L804", "name": "Conflicts", "description": "War & tension." }
+        ]
+      }
+    ]
+  }
+]

@@ -27,7 +27,7 @@ export default function CourseNavigation() {
         const lower = link.toLowerCase();
         const path =
           lower === "people"
-            ? `/courses/${cid}/people/table`
+            ? `/courses/${cid}/people`
             : `/courses/${cid}/${lower}`;
         const isActive = pathname === path;
 
@@ -35,13 +35,12 @@ export default function CourseNavigation() {
           <ListGroupItem
             key={link}
             as="div"
-            className="p-0 border-0"  
+            className="p-0 border-0"
           >
             <Link
               href={path}
-              className={`wd-nav-link d-block w-100 px-3 py-2 ${
-                isActive ? "active" : "inactive"
-              }`}
+              className={`wd-nav-link d-block w-100 px-3 py-2 ${isActive ? "active" : "inactive"
+                }`}
             >
               {link}
             </Link>

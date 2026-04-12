@@ -18,9 +18,8 @@ import { RootState } from "../../../store";
 import * as client from "../../client";
 
 export default function Modules() {
-  const { cid } = useParams();
-
-  const courseId = Array.isArray(cid) ? cid[0] : cid;
+  const { cid } = useParams<{ cid: string }>();
+  const courseId = cid;
 
   const [moduleName, setModuleName] = useState("");
 
@@ -39,13 +38,13 @@ export default function Modules() {
   const dispatch = useDispatch();
 
   const onUpdateModule = async (module: any) => {
-    await client.updateModule(module);
+    await client.updateModule(cid, module);
     const newModules = modules.map((m: any) => m._id === module._id ? module : m);
     dispatch(setModules(newModules));
   };
 
   const onRemoveModule = async (moduleId: string) => {
-    await client.deleteModule(moduleId);
+    await client.deleteModule(cid, moduleId);
     dispatch(setModules(modules.filter((m: any) => m._id !== moduleId)));
   };
 

@@ -9,16 +9,16 @@ export const findMyCourses = async () => {
   return data;
 };
 
-export const enrollInCourse = async (courseId: string) => {
+export const enrollIntoCourse = async (userId: string, courseId: string) => {
   const { data } = await axiosWithCredentials.post(
-    `${USERS_API}/current/courses/${courseId}/enrollment`
+    `${USERS_API}/${userId}/courses/${courseId}`
   );
   return data;
 };
 
-export const unenrollFromCourse = async (courseId: string) => {
+export const unenrollFromCourse = async (userId: string, courseId: string) => {
   const { data } = await axiosWithCredentials.delete(
-    `${USERS_API}/current/courses/${courseId}/enrollment`
+    `${USERS_API}/${userId}/courses/${courseId}`
   );
   return data;
 };
