@@ -4,16 +4,7 @@ import * as db from "../../../../database";
 import { useParams } from "next/navigation";
 import { FaUserCircle } from "react-icons/fa";
 
-export default function PeopleTable() {
-  const { cid } = useParams();
-  const { users, enrollments } = db;
-
-  const courseUsers = users.filter((usr) =>
-    enrollments.some(
-      (enrollment) => enrollment.user === usr._id && enrollment.course === cid
-    )
-  );
-
+export default function PeopleTable({ users = [], fetchUsers }: { users?: any[]; fetchUsers: () => void; }) {
   return (
     <div id="wd-people-table">
       <table className="table table-striped">
@@ -28,7 +19,7 @@ export default function PeopleTable() {
           </tr>
         </thead>
         <tbody>
-          {courseUsers.map((user) => (
+          {users.map((user: any) => (
             <tr key={user._id}>
               <td className="wd-full-name text-nowrap">
                 <FaUserCircle className="me-2 fs-1 text-secondary" />
