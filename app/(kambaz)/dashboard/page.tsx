@@ -67,24 +67,24 @@ export default function Dashboard() {
 
   const onAddNewCourse = async () => {
     const newCourse = await coursesClient.createCourse(course);
-    dispatch(setCourses([...courses, newCourse]));
+    dispatch(setCourses([...safeCourses, newCourse]));
   };
 
   const onDeleteCourse = async (courseId: string) => {
     await coursesClient.deleteCourse(courseId);
-    dispatch(setCourses(courses.filter((course) => course._id !== courseId)));
-    setAllCourses(allCourses.filter((course) => course._id !== courseId));
+    dispatch(setCourses(safeCourses.filter((c) => c._id !== courseId)));
+    setAllCourses(allCourses.filter((c) => c && c._id !== courseId));
   };
 
   const onUpdateCourse = async () => {
     await coursesClient.updateCourse(course);
     dispatch(
       setCourses(
-        courses.map((c) => (c._id === course._id ? course : c))
+        safeCourses.map((c) => (c._id === course._id ? course : c))
       )
     );
     setAllCourses(
-      allCourses.map((c) => (c._id === course._id ? course : c))
+      allCourses.map((c) => (c && c._id === course._id ? course : c))
     );
   };
 
@@ -107,12 +107,18 @@ export default function Dashboard() {
 
   if (!currentUser) return <div>Loading...</div>;
 
-  const enrolledCourseIds = new Set(courses.map((c: any) => c._id));
+  const safeCourses = (courses || []).filter((c: any) => c && c._id);
+  const safeAllCourses = (allCourses || []).filter((c: any) => c && c._id);
+
+  const enrolledCourseIds = new Set(
+    safeCourses.map((c: any) => c._id)
+  );
+
   const visibleCourses = isStudent
-  ? showAll
-    ? allCourses
-    : courses
-  : allCourses;
+    ? showAll
+      ? safeAllCourses
+      : safeCourses
+    : safeAllCourses;
 
   return (
     <div className="p-4">

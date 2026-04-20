@@ -28,6 +28,70 @@
           { "_id": "L105", "name": "useEffect", "description": "Side effects." }
         ]
       }
+    ],
+    "quizzes": [
+      {
+        "_id": "Q101",
+        "title": "React Basics Quiz",
+        "description": "Quiz on React fundamentals and JSX.",
+        "quizType": "Graded Quiz",
+        "assignmentGroup": "Quizzes",
+        "shuffleAnswers": true,
+        "timeLimit": 20,
+        "multipleAttempts": false,
+        "howManyAttempts": 1,
+        "showCorrectAnswers": "",
+        "accessCode": "",
+        "oneQuestionAtATime": true,
+        "webcamRequired": false,
+        "lockQuestionsAfterAnswering": false,
+        "dueDate": "2026-04-25T23:59",
+        "availableDate": "2026-04-20T00:00",
+        "untilDate": "2026-04-25T23:59",
+        "published": true,
+        "points": 3,
+        "questions": [
+          {
+            "_id": "Q101-1",
+            "title": "JSX",
+            "type": "MULTIPLE_CHOICE",
+            "points": 1,
+            "questionText": "What does JSX allow developers to write?",
+            "choices": [
+              "SQL queries",
+              "HTML-like syntax in JavaScript",
+              "Only CSS rules",
+              "Server routes"
+            ],
+            "correctChoice": 1,
+            "trueFalseAnswer": true,
+            "blankAnswers": []
+          },
+          {
+            "_id": "Q101-2",
+            "title": "React Purpose",
+            "type": "TRUE_FALSE",
+            "points": 1,
+            "questionText": "React is commonly used for building user interfaces.",
+            "choices": [],
+            "correctChoice": 0,
+            "trueFalseAnswer": true,
+            "blankAnswers": []
+          },
+          {
+            "_id": "Q101-3",
+            "title": "State Hook",
+            "type": "FILL_IN_BLANK",
+            "points": 1,
+            "questionText": "The React hook used for local component state is ____.",
+            "choices": [],
+            "correctChoice": 0,
+            "trueFalseAnswer": true,
+            "blankAnswers": ["useState", "use state"]
+          }
+        ],
+        "attempts": []
+      }
     ]
   },
   {
@@ -57,6 +121,65 @@
           { "_id": "L203", "name": "Promises", "description": "Async handling." },
           { "_id": "L204", "name": "Async/Await", "description": "Cleaner async." }
         ]
+      }
+    ],
+    "quizzes": [
+      {
+        "_id": "Q201",
+        "title": "JavaScript Fundamentals Quiz",
+        "description": "Variables, functions, and async basics.",
+        "quizType": "Graded Quiz",
+        "assignmentGroup": "Quizzes",
+        "shuffleAnswers": true,
+        "timeLimit": 20,
+        "multipleAttempts": true,
+        "howManyAttempts": 2,
+        "showCorrectAnswers": "",
+        "accessCode": "",
+        "oneQuestionAtATime": true,
+        "webcamRequired": false,
+        "lockQuestionsAfterAnswering": false,
+        "dueDate": "2026-04-26T23:59",
+        "availableDate": "2026-04-20T00:00",
+        "untilDate": "2026-04-26T23:59",
+        "published": true,
+        "points": 3,
+        "questions": [
+          {
+            "_id": "Q201-1",
+            "title": "Variable Keyword",
+            "type": "MULTIPLE_CHOICE",
+            "points": 1,
+            "questionText": "Which keyword declares a block-scoped variable?",
+            "choices": ["var", "let", "function", "return"],
+            "correctChoice": 1,
+            "trueFalseAnswer": true,
+            "blankAnswers": []
+          },
+          {
+            "_id": "Q201-2",
+            "title": "Async Await",
+            "type": "TRUE_FALSE",
+            "points": 1,
+            "questionText": "The await keyword can be used inside an async function.",
+            "choices": [],
+            "correctChoice": 0,
+            "trueFalseAnswer": true,
+            "blankAnswers": []
+          },
+          {
+            "_id": "Q201-3",
+            "title": "Promise Method",
+            "type": "FILL_IN_BLANK",
+            "points": 1,
+            "questionText": "The method used to handle a resolved promise is ____.",
+            "choices": [],
+            "correctChoice": 0,
+            "trueFalseAnswer": true,
+            "blankAnswers": ["then", ".then"]
+          }
+        ],
+        "attempts": []
       }
     ]
   },
@@ -88,6 +211,65 @@
           { "_id": "L304", "name": "Abstract Art", "description": "Non-representational." }
         ]
       }
+    ],
+    "quizzes": [
+      {
+        "_id": "Q301",
+        "title": "Art History Overview Quiz",
+        "description": "Ancient and modern art movements.",
+        "quizType": "Graded Quiz",
+        "assignmentGroup": "Quizzes",
+        "shuffleAnswers": false,
+        "timeLimit": 15,
+        "multipleAttempts": false,
+        "howManyAttempts": 1,
+        "showCorrectAnswers": "",
+        "accessCode": "",
+        "oneQuestionAtATime": true,
+        "webcamRequired": false,
+        "lockQuestionsAfterAnswering": false,
+        "dueDate": "2026-04-24T23:59",
+        "availableDate": "2026-04-20T00:00",
+        "untilDate": "2026-04-24T23:59",
+        "published": true,
+        "points": 3,
+        "questions": [
+          {
+            "_id": "Q301-1",
+            "title": "Greek Art",
+            "type": "MULTIPLE_CHOICE",
+            "points": 1,
+            "questionText": "Greek art is most associated with which historical period?",
+            "choices": ["Classical period", "Industrial age", "Digital age", "Space age"],
+            "correctChoice": 0,
+            "trueFalseAnswer": true,
+            "blankAnswers": []
+          },
+          {
+            "_id": "Q301-2",
+            "title": "Abstract Art",
+            "type": "TRUE_FALSE",
+            "points": 1,
+            "questionText": "Abstract art is always intended to be realistic.",
+            "choices": [],
+            "correctChoice": 0,
+            "trueFalseAnswer": false,
+            "blankAnswers": []
+          },
+          {
+            "_id": "Q301-3",
+            "title": "Impressionism",
+            "type": "FILL_IN_BLANK",
+            "points": 1,
+            "questionText": "The movement known for light and color effects is ____.",
+            "choices": [],
+            "correctChoice": 0,
+            "trueFalseAnswer": true,
+            "blankAnswers": ["Impressionism", "impressionism"]
+          }
+        ],
+        "attempts": []
+      }
     ]
   },
   {
@@ -117,6 +299,70 @@
           { "_id": "L403", "name": "Thesis", "description": "Core idea." },
           { "_id": "L404", "name": "Paragraphs", "description": "Structure." }
         ]
+      }
+    ],
+    "quizzes": [
+      {
+        "_id": "Q401",
+        "title": "Writing Skills Quiz",
+        "description": "Grammar and essay basics.",
+        "quizType": "Graded Quiz",
+        "assignmentGroup": "Quizzes",
+        "shuffleAnswers": true,
+        "timeLimit": 15,
+        "multipleAttempts": true,
+        "howManyAttempts": 2,
+        "showCorrectAnswers": "",
+        "accessCode": "",
+        "oneQuestionAtATime": false,
+        "webcamRequired": false,
+        "lockQuestionsAfterAnswering": false,
+        "dueDate": "2026-04-27T23:59",
+        "availableDate": "2026-04-20T00:00",
+        "untilDate": "2026-04-27T23:59",
+        "published": true,
+        "points": 3,
+        "questions": [
+          {
+            "_id": "Q401-1",
+            "title": "Thesis Statement",
+            "type": "MULTIPLE_CHOICE",
+            "points": 1,
+            "questionText": "A thesis statement usually expresses what?",
+            "choices": [
+              "The main argument",
+              "A random detail",
+              "The bibliography",
+              "The page number"
+            ],
+            "correctChoice": 0,
+            "trueFalseAnswer": true,
+            "blankAnswers": []
+          },
+          {
+            "_id": "Q401-2",
+            "title": "Punctuation",
+            "type": "TRUE_FALSE",
+            "points": 1,
+            "questionText": "Punctuation has no effect on clarity.",
+            "choices": [],
+            "correctChoice": 0,
+            "trueFalseAnswer": false,
+            "blankAnswers": []
+          },
+          {
+            "_id": "Q401-3",
+            "title": "Essay Unit",
+            "type": "FILL_IN_BLANK",
+            "points": 1,
+            "questionText": "An essay is commonly organized into ____.",
+            "choices": [],
+            "correctChoice": 0,
+            "trueFalseAnswer": true,
+            "blankAnswers": ["paragraphs", "a series of paragraphs"]
+          }
+        ],
+        "attempts": []
       }
     ]
   },
@@ -148,6 +394,70 @@
           { "_id": "L504", "name": "Friction", "description": "Resistance." }
         ]
       }
+    ],
+    "quizzes": [
+      {
+        "_id": "Q501",
+        "title": "Physics Fundamentals Quiz",
+        "description": "Motion and force concepts.",
+        "quizType": "Graded Quiz",
+        "assignmentGroup": "Quizzes",
+        "shuffleAnswers": true,
+        "timeLimit": 20,
+        "multipleAttempts": false,
+        "howManyAttempts": 1,
+        "showCorrectAnswers": "",
+        "accessCode": "",
+        "oneQuestionAtATime": true,
+        "webcamRequired": false,
+        "lockQuestionsAfterAnswering": false,
+        "dueDate": "2026-04-28T23:59",
+        "availableDate": "2026-04-20T00:00",
+        "untilDate": "2026-04-28T23:59",
+        "published": true,
+        "points": 3,
+        "questions": [
+          {
+            "_id": "Q501-1",
+            "title": "Acceleration",
+            "type": "MULTIPLE_CHOICE",
+            "points": 1,
+            "questionText": "Acceleration is best defined as:",
+            "choices": [
+              "A type of friction",
+              "Change in velocity over time",
+              "Total energy",
+              "Distance only"
+            ],
+            "correctChoice": 1,
+            "trueFalseAnswer": true,
+            "blankAnswers": []
+          },
+          {
+            "_id": "Q501-2",
+            "title": "Newton",
+            "type": "TRUE_FALSE",
+            "points": 1,
+            "questionText": "Newton's laws describe motion and forces.",
+            "choices": [],
+            "correctChoice": 0,
+            "trueFalseAnswer": true,
+            "blankAnswers": []
+          },
+          {
+            "_id": "Q501-3",
+            "title": "Resistance",
+            "type": "FILL_IN_BLANK",
+            "points": 1,
+            "questionText": "The force that resists motion between surfaces is ____.",
+            "choices": [],
+            "correctChoice": 0,
+            "trueFalseAnswer": true,
+            "blankAnswers": ["friction"]
+          }
+        ],
+        "attempts": []
+      }
     ]
   },
   {
@@ -177,6 +487,65 @@
           { "_id": "L603", "name": "Types", "description": "Reaction types." },
           { "_id": "L604", "name": "Stoichiometry", "description": "Balancing." }
         ]
+      }
+    ],
+    "quizzes": [
+      {
+        "_id": "Q601",
+        "title": "Chemistry Basics Quiz",
+        "description": "Atoms and reactions.",
+        "quizType": "Graded Quiz",
+        "assignmentGroup": "Quizzes",
+        "shuffleAnswers": true,
+        "timeLimit": 20,
+        "multipleAttempts": true,
+        "howManyAttempts": 2,
+        "showCorrectAnswers": "",
+        "accessCode": "",
+        "oneQuestionAtATime": true,
+        "webcamRequired": false,
+        "lockQuestionsAfterAnswering": false,
+        "dueDate": "2026-04-28T23:59",
+        "availableDate": "2026-04-20T00:00",
+        "untilDate": "2026-04-28T23:59",
+        "published": true,
+        "points": 3,
+        "questions": [
+          {
+            "_id": "Q601-1",
+            "title": "Protons",
+            "type": "MULTIPLE_CHOICE",
+            "points": 1,
+            "questionText": "What charge does a proton have?",
+            "choices": ["Negative", "Neutral", "Positive", "Variable"],
+            "correctChoice": 2,
+            "trueFalseAnswer": true,
+            "blankAnswers": []
+          },
+          {
+            "_id": "Q601-2",
+            "title": "Electrons",
+            "type": "TRUE_FALSE",
+            "points": 1,
+            "questionText": "Electrons have a negative charge.",
+            "choices": [],
+            "correctChoice": 0,
+            "trueFalseAnswer": true,
+            "blankAnswers": []
+          },
+          {
+            "_id": "Q601-3",
+            "title": "Balancing",
+            "type": "FILL_IN_BLANK",
+            "points": 1,
+            "questionText": "The process of matching atoms on both sides of an equation is called ____.",
+            "choices": [],
+            "correctChoice": 0,
+            "trueFalseAnswer": true,
+            "blankAnswers": ["balancing", "balancing equations"]
+          }
+        ],
+        "attempts": []
       }
     ]
   },
@@ -208,6 +577,65 @@
           { "_id": "L704", "name": "Inheritance", "description": "Traits." }
         ]
       }
+    ],
+    "quizzes": [
+      {
+        "_id": "Q701",
+        "title": "Biology Essentials Quiz",
+        "description": "Cells and genetics.",
+        "quizType": "Graded Quiz",
+        "assignmentGroup": "Quizzes",
+        "shuffleAnswers": true,
+        "timeLimit": 20,
+        "multipleAttempts": false,
+        "howManyAttempts": 1,
+        "showCorrectAnswers": "",
+        "accessCode": "",
+        "oneQuestionAtATime": true,
+        "webcamRequired": false,
+        "lockQuestionsAfterAnswering": false,
+        "dueDate": "2026-04-29T23:59",
+        "availableDate": "2026-04-20T00:00",
+        "untilDate": "2026-04-29T23:59",
+        "published": true,
+        "points": 3,
+        "questions": [
+          {
+            "_id": "Q701-1",
+            "title": "DNA",
+            "type": "MULTIPLE_CHOICE",
+            "points": 1,
+            "questionText": "DNA is primarily associated with:",
+            "choices": ["Weather", "Genetic information", "Rock layers", "Metals"],
+            "correctChoice": 1,
+            "trueFalseAnswer": true,
+            "blankAnswers": []
+          },
+          {
+            "_id": "Q701-2",
+            "title": "Cell Membrane",
+            "type": "TRUE_FALSE",
+            "points": 1,
+            "questionText": "The cell membrane acts as a barrier.",
+            "choices": [],
+            "correctChoice": 0,
+            "trueFalseAnswer": true,
+            "blankAnswers": []
+          },
+          {
+            "_id": "Q701-3",
+            "title": "Traits",
+            "type": "FILL_IN_BLANK",
+            "points": 1,
+            "questionText": "The passing of traits from parents to offspring is called ____.",
+            "choices": [],
+            "correctChoice": 0,
+            "trueFalseAnswer": true,
+            "blankAnswers": ["inheritance"]
+          }
+        ],
+        "attempts": []
+      }
     ]
   },
   {
@@ -237,6 +665,65 @@
           { "_id": "L803", "name": "Alliances", "description": "Cooperation." },
           { "_id": "L804", "name": "Conflicts", "description": "War & tension." }
         ]
+      }
+    ],
+    "quizzes": [
+      {
+        "_id": "Q801",
+        "title": "Middle-earth Diplomacy Quiz",
+        "description": "Races, alliances, and conflicts.",
+        "quizType": "Graded Quiz",
+        "assignmentGroup": "Quizzes",
+        "shuffleAnswers": false,
+        "timeLimit": 15,
+        "multipleAttempts": true,
+        "howManyAttempts": 2,
+        "showCorrectAnswers": "",
+        "accessCode": "",
+        "oneQuestionAtATime": true,
+        "webcamRequired": false,
+        "lockQuestionsAfterAnswering": false,
+        "dueDate": "2026-04-30T23:59",
+        "availableDate": "2026-04-20T00:00",
+        "untilDate": "2026-04-30T23:59",
+        "published": true,
+        "points": 3,
+        "questions": [
+          {
+            "_id": "Q801-1",
+            "title": "Elves",
+            "type": "MULTIPLE_CHOICE",
+            "points": 1,
+            "questionText": "Elves are described in the course as:",
+            "choices": ["Industrial workers", "Immortal beings", "Sea creatures", "Farmers"],
+            "correctChoice": 1,
+            "trueFalseAnswer": true,
+            "blankAnswers": []
+          },
+          {
+            "_id": "Q801-2",
+            "title": "Alliances",
+            "type": "TRUE_FALSE",
+            "points": 1,
+            "questionText": "Alliances are forms of cooperation.",
+            "choices": [],
+            "correctChoice": 0,
+            "trueFalseAnswer": true,
+            "blankAnswers": []
+          },
+          {
+            "_id": "Q801-3",
+            "title": "Tension",
+            "type": "FILL_IN_BLANK",
+            "points": 1,
+            "questionText": "War and tension are examples of ____.",
+            "choices": [],
+            "correctChoice": 0,
+            "trueFalseAnswer": true,
+            "blankAnswers": ["conflicts", "conflict"]
+          }
+        ],
+        "attempts": []
       }
     ]
   }
